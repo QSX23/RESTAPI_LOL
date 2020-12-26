@@ -67,7 +67,7 @@ func GetTierWinsHot(p Player) Player {
 //PopulateData populates our table
 func PopulateData(people []string) []Player {
 
-	db := make([]Player, len(people))
+	db := make([]Player, 0)
 
 	//iterate over the people and create a struct for each with all data
 	for _, x := range people {
