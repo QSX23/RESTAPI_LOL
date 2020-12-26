@@ -91,7 +91,6 @@ func DeletePlayerEndpoint(w http.ResponseWriter, req *http.Request) {
 
 //the main program
 func main() {
-	router := mux.NewRouter()
 
 	data := PopulateData(people)
 
@@ -99,13 +98,8 @@ func main() {
 		db = append(db, item)
 	}
 
-	//all of the endpoints for this REST api
-	router.HandleFunc("/players", GetPlayersEndpoint).Methods("GET")
-	router.HandleFunc("/players/{name}", GetPlayerEndpoint).Methods("GET")
-	//router.HandleFunc("/players/{name}", CreateWholePlayerEndpoint).Methods("POST")
-	router.HandleFunc("/players/{name}", CreatePlayerEndpoint).Methods("POST")
-	//router.HandleFunc("/players/{name}", UpdatePlayerEndpoint).Methods("PUT")
-	router.HandleFunc("/players/{name}", DeletePlayerEndpoint).Methods("DELETE")
+	//router := mux.NewRouter()
+	router := Router()
 
 	//listener for requests wrapped in log fatal to document failure
 	log.Fatal(http.ListenAndServe(":8000", router))
