@@ -63,7 +63,7 @@ func UpdatePlayerEndpoint(w http.ResponseWriter, req *http.Request) {
 	var player Player
 
 	for _, item := range db {
-		if item.Username == params["name"] {
+		if strings.ToLower(item.Username) == strings.ToLower(params["name"]) {
 			_ = json.NewDecoder(req.Body).Decode(&player)
 			player.Username = params["name"]
 			db = append(db, player)
@@ -81,7 +81,7 @@ func DeletePlayerEndpoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 
 	for i, item := range db {
-		if item.Username == params["name"] {
+		if strings.ToLower(item.Username) == strings.ToLower(params["name"]) {
 			db = append(db[:i], db[i+1:]...)
 			break
 		}
